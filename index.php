@@ -62,7 +62,7 @@
     <h2>Get movies by year</h2>
     <label for="year">Year: </label>
     <input type="number" name="year" id="year" min="1888" max="<?= date('Y') ?>" value="<?= date('Y') ?>">
-    <button onclick="">Load data</button>
+    <button onclick="loadByYear();">Load data</button>
     <div>
         <table>
             <thead>

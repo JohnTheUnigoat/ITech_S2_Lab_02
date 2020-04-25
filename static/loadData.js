@@ -33,3 +33,14 @@ function loadByActor() {
         insertMoviesInTbody(tbody, movies);
     });
 }
+
+function loadByYear() {
+    let year = $('#year').val();
+    let tbody = $('#tbody-year');
+
+    $.get('year.php', {'year': year}, data => {
+        let movies = JSON.parse(data);
+
+        insertMoviesInTbody(tbody, movies);
+    });
+}
