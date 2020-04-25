@@ -17,6 +17,10 @@ function loadByMedia() {
     let tbody = $('#tbody-media');
 
     $.get('media.php', {'media': media}, data => {
+        let key = JSON.stringify({'media': media});
+
+        localStorage.setItem(key, data);
+
         let movies = JSON.parse(data);
 
         insertMoviesInTbody(tbody, movies);
@@ -28,6 +32,10 @@ function loadByActor() {
     let tbody = $('#tbody-actor');
 
     $.get('actor.php', {'actor': actor}, data => {
+        let key = JSON.stringify({'actor': actor});
+
+        localStorage.setItem(key, data);
+
         let movies = JSON.parse(data);
 
         insertMoviesInTbody(tbody, movies);
@@ -39,6 +47,10 @@ function loadByYear() {
     let tbody = $('#tbody-year');
 
     $.get('year.php', {'year': year}, data => {
+        let key = JSON.stringify({'year': year});
+
+        localStorage.setItem(key, data);
+
         let movies = JSON.parse(data);
 
         insertMoviesInTbody(tbody, movies);
