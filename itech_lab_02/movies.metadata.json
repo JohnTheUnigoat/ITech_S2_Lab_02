@@ -1,0 +1,1 @@
+{"options":{},"indexes":[{"v":{"$numberInt":"2"},"key":{"_id":{"$numberInt":"1"}},"name":"_id_","ns":"itech_lab_02.movies"}],"uuid":"f3e7493a60ad43d3899072749af06fb1"}
