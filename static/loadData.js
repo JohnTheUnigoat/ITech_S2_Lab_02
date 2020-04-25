@@ -1,4 +1,6 @@
 function insertMoviesInTbody(tbody, movies) {
+    tbody.empty();
+
     movies.forEach(movie => {
         let tr = $('<tr></tr>');
         tr.append($(`<td>${movie.name}</td>`));
@@ -15,6 +17,17 @@ function loadByMedia() {
     let tbody = $('#tbody-media');
 
     $.get('media.php', {'media': media}, data => {
+        let movies = JSON.parse(data);
+
+        insertMoviesInTbody(tbody, movies);
+    });
+}
+
+function loadByActor() {
+    let actor = $('#actor').val();
+    let tbody = $('#tbody-actor');
+
+    $.get('actor.php', {'actor': actor}, data => {
         let movies = JSON.parse(data);
 
         insertMoviesInTbody(tbody, movies);

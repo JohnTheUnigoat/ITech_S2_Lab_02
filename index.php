@@ -13,7 +13,11 @@
     <label for="media">Media type: </label>
     <select name="media" id="media">
         <?php foreach(getMedias() as $media): ?>
-            <option value="<?= $media ?>"><?= $media ?></option>
+            <?php if ($media == 'VHS'): ?>
+                <option value="<?= $media ?>" selected="selected"><?= $media ?></option>
+            <?php else: ?>
+                <option value="<?= $media ?>"><?= $media ?></option>
+            <?php endif; ?>
         <?php endforeach; ?>
     </select>
     <button onclick="loadByMedia();">Load data</button>
@@ -39,7 +43,7 @@
             <option value="<?= $actor ?>"><?= $actor ?></option>
         <?php endforeach; ?>
     </select>
-    <button onclick="">Load data</button>
+    <button onclick="loadByActor();">Load data</button>
     <div>
         <table>
             <thead>
