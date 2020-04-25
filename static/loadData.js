@@ -27,6 +27,21 @@ function loadByMedia() {
     });
 }
 
+function tryLocalByMedia() {
+    let key = JSON.stringify({'media': $('#media').val()});
+    let data = localStorage.getItem(key);
+
+    if (data === null) {
+        alert('No stored query with this parameter!');
+        return;
+    }
+
+    let tbody = $('#tbody-media-local');
+    let movies = JSON.parse(data);
+
+    insertMoviesInTbody(tbody, movies);
+}
+
 function loadByActor() {
     let actor = $('#actor').val();
     let tbody = $('#tbody-actor');
@@ -42,6 +57,21 @@ function loadByActor() {
     });
 }
 
+function tryLocalByActor() {
+    let key = JSON.stringify({'actor': $('#actor').val()});
+    let data = localStorage.getItem(key);
+
+    if (data === null) {
+        alert('No stored query with this parameter!');
+        return;
+    }
+
+    let tbody = $('#tbody-actor-local');
+    let movies = JSON.parse(data);
+
+    insertMoviesInTbody(tbody, movies);
+}
+
 function loadByYear() {
     let year = $('#year').val();
     let tbody = $('#tbody-year');
@@ -55,4 +85,19 @@ function loadByYear() {
 
         insertMoviesInTbody(tbody, movies);
     });
+}
+
+function tryLocalByYear() {
+    let key = JSON.stringify({'year': $('#year').val()});
+    let data = localStorage.getItem(key);
+
+    if (data === null) {
+        alert('No stored query with this parameter!');
+        return;
+    }
+
+    let tbody = $('#tbody-year-local');
+    let movies = JSON.parse(data);
+
+    insertMoviesInTbody(tbody, movies);
 }

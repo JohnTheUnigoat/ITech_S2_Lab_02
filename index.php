@@ -21,8 +21,10 @@
         <?php endforeach; ?>
     </select>
     <button onclick="loadByMedia();">Load data</button>
-    <div>
-        <table>
+    <button onclick="tryLocalByMedia();">Check local storage</button>
+    <br>
+    <div style="display: inline-block;">
+        <table border="1px">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -32,6 +34,19 @@
                 </tr>
             </thead>
             <tbody id="tbody-media"></tbody>
+        </table>
+    </div>
+    <div style="display: inline-block;">
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Media</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-media-local"></tbody>
         </table>
     </div>
     <hr>
@@ -44,8 +59,10 @@
         <?php endforeach; ?>
     </select>
     <button onclick="loadByActor();">Load data</button>
-    <div>
-        <table>
+    <button onclick="tryLocalByActor();">Check local storage</button>
+    <br>
+    <div style="display: inline-block;">
+        <table border="1px">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -57,14 +74,29 @@
             <tbody id="tbody-actor"></tbody>
         </table>
     </div>
+    <div style="display: inline-block;">
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Media</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-actor-local"></tbody>
+        </table>
+    </div>
     <hr>
     
     <h2>Get movies by year</h2>
     <label for="year">Year: </label>
     <input type="number" name="year" id="year" min="1888" max="<?= date('Y') ?>" value="<?= date('Y') ?>">
     <button onclick="loadByYear();">Load data</button>
-    <div>
-        <table>
+    <button onclick="tryLocalByYear();">Check local storage</button>
+    <br>
+    <div style="display: inline-block;">
+        <table border="1px">
             <thead>
                 <tr>
                     <th>Name</th>
@@ -74,6 +106,19 @@
                 </tr>
             </thead>
             <tbody id="tbody-year"></tbody>
+        </table>
+    </div>
+    <div style="display: inline-block;">
+        <table border="1px">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Year</th>
+                    <th>Director</th>
+                    <th>Media</th>
+                </tr>
+            </thead>
+            <tbody id="tbody-year-local"></tbody>
         </table>
     </div>
     <hr>
