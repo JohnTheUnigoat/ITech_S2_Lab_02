@@ -1,24 +1,29 @@
 var localStorage = window.localStorage;
 
-if (localStorage.getItem('maxQueriesStored') === null) {
+if (localStorage.getItem('max_queries_stored') === null) {
     localStorage.clear();
-    localStorage.setItem('maxQueriesStored', 5);
+    localStorage.setItem('max_queries_stored', 5);
 }
 
-if (localStorage.getItem('queriesMedia') === null) {
-    localStorage.setItem('queriesMedia', JSON.stringify([]));
+if (localStorage.getItem('queries_media') === null) {
+    localStorage.setItem('queries_media', JSON.stringify([]));
 }
 
-if (localStorage.getItem('queriesActor') === null) {
-    localStorage.setItem('queriesActor', JSON.stringify([]));
+if (localStorage.getItem('queries_actor') === null) {
+    localStorage.setItem('queries_actor', JSON.stringify([]));
 }
 
-if (localStorage.getItem('queriesYear') === null) {
-    localStorage.setItem('queriesYear', JSON.stringify([]));
+if (localStorage.getItem('queries_year') === null) {
+    localStorage.setItem('queries_year', JSON.stringify([]));
 }
 
 function insertMoviesInTbody(tbody, movies) {
     tbody.empty();
+
+    if (movies.length == 0) {
+        tbody.append($('<tr><td colspan="4">No entries found!</td></tr>'));
+        return;
+    }
 
     movies.forEach(movie => {
         let tr = $('<tr></tr>');
@@ -33,7 +38,7 @@ function insertMoviesInTbody(tbody, movies) {
 
 function storeQuerry(key, query) {
     let queries = JSON.parse(localStorage.getItem(key));
-    let maxSize = parseInt(localStorage.getItem('maxQueriesStored'));
+    let maxSize = parseInt(localStorage.getItem('max_queries_stored'));
 
     for (let i = 0; i < queries.length; i++) {
         if (queries[i].param == query.param){
@@ -50,54 +55,34 @@ function storeQuerry(key, query) {
     localStorage.setItem(key, JSON.stringify(queries));
 }
 
-function loadByMedia() {
-    let media = $('#media').val();
-    let tbody = $('#tbody-media');
+function loadData(paramType) {
+    let param = $('#' + paramType).val();
+    let tbody = $('#tbody-' + paramType);
 
-    $.get('media.php', {'media': media}, data => {
+    $.get(paramType + '.php', {[paramType]: param}, data => {
         let query = {
-            'param': media,
+            'param': param,
             'response': data
         };
-
-        storeQuerry('queriesMedia', query);
+        storeQuerry('queries_' + paramType, query);
 
         let movies = JSON.parse(data);
-
         insertMoviesInTbody(tbody, movies);
     });
 }
 
-function loadByActor() {
-    let actor = $('#actor').val();
-    let tbody = $('#tbody-actor');
+function tryLocalStorage(paramType) {
+    let param = $('#' + paramType).val();
+    let tbody = $('#tbody-' + paramType + '-local');
 
-    $.get('actor.php', {'actor': actor}, data => {
-        let query = {
-            'param': actor,
-            'response': data
-        };
+    let queries = JSON.parse(localStorage.getItem('queries_' + paramType));
 
-        storeQuerry('queriesActor', query);
-        let movies = JSON.parse(data);
+    for (let i = 0; i < queries.length; i++) {
+        if (queries[i].param == param) {
+            insertMoviesInTbody(tbody, JSON.parse(queries[i].response));
+            return;
+        }
+    }
 
-        insertMoviesInTbody(tbody, movies);
-    });
-}
-
-function loadByYear() {
-    let year = $('#year').val();
-    let tbody = $('#tbody-year');
-
-    $.get('year.php', {'year': year}, data => {
-        let query = {
-            'param': year,
-            'response': data
-        };
-
-        storeQuerry('queriesYear', query);
-        let movies = JSON.parse(data);
-
-        insertMoviesInTbody(tbody, movies);
-    });
+    alert('No stored query with this parameter found!');
 }
